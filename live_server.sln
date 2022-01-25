@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liveserver.app", "liveserver.app\liveserver.app.csproj", "{0F339EBC-9E86-4880-B275-855A1D3FB3FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "liveserver.test", "liveserver.test\liveserver.test.csproj", "{EEBCC77C-7553-4FB2-B90E-2B1A65941E30}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F339EBC-9E86-4880-B275-855A1D3FB3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F339EBC-9E86-4880-B275-855A1D3FB3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F339EBC-9E86-4880-B275-855A1D3FB3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F339EBC-9E86-4880-B275-855A1D3FB3FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEBCC77C-7553-4FB2-B90E-2B1A65941E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEBCC77C-7553-4FB2-B90E-2B1A65941E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEBCC77C-7553-4FB2-B90E-2B1A65941E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEBCC77C-7553-4FB2-B90E-2B1A65941E30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
