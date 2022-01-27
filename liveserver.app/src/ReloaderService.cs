@@ -4,15 +4,15 @@ using WebSocketSharp.Server;
 namespace liverserver.app {
 
 public class ReloaderService : WebSocketBehavior {
-    DateTime lastOperationTime = DateTime.MinValue;
+    public string targetDir = "";
+
+    private DateTime lastOperationTime = DateTime.MinValue;
 
     protected override void OnOpen()
     {
         Console.WriteLine("Server: connection was established");
 
-        string target = "/home/xemerius/devs/live_server/liveserver.test/rcs";
-
-        using var watcher = new FileSystemWatcher(target);
+        using var watcher = new FileSystemWatcher(targetDir);
 
         watcher.NotifyFilter = NotifyFilters.LastWrite;
 

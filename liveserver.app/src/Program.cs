@@ -12,9 +12,13 @@ public class Program {
 
     public static void Main(string[] args) 
     {
-        
+        string target = "/home/xemerius/devs/live_server/liveserver.test/rcs";
+
         var wb = new WebSocketServer("ws://localhost:80");
-        wb.AddWebSocketService<ReloaderService>("/");
+        wb.AddWebSocketService<ReloaderService>("/",
+            () => new ReloaderService() {
+                targetDir = target
+            });
 
         wb.Start();
         
