@@ -423,4 +423,4 @@ obj/
 .ionide
 
 # Support for Project snippet scope
-
+.vscode/
