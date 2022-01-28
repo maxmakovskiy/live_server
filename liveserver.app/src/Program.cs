@@ -12,6 +12,10 @@ public class Program {
 
     public static void Main(string[] args) 
     {
+        HttpServer server = new HttpServer("127.0.0.1", 80);
+        server.Start();
+
+        /*
         string target = "/home/xemerius/devs/live_server/liveserver.test/rcs";
 
         var wb = new WebSocketServer("ws://localhost:80");
@@ -25,7 +29,7 @@ public class Program {
         Console.ReadKey(true); // block
         
         wb.Stop();
-        
+        */
 
     }
 
