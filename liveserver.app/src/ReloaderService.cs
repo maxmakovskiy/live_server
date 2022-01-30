@@ -1,42 +1,54 @@
-using WebSocketSharp;
-using WebSocketSharp.Server;
+using WebSocketSharp.NetCore.Server;
 
-namespace liverserver.app {
+namespace liveserver.app {
 
 public class ReloaderService : WebSocketBehavior {
-    public string targetDir = "";
+    public string Target = "";
 
     private DateTime lastOperationTime = DateTime.MinValue;
+    private FileSystemWatcher watcher;
+
+    public ReloaderService()
+    {
+        watcher = new FileSystemWatcher();
+    }
+
+    ~ReloaderService()
+    {
+        watcher.Dispose();
+    }
 
     protected override void OnOpen()
     {
-        using var watcher = new FileSystemWatcher(targetDir);
+        var target = FileUtils.SplitToDirAndFile(Target);
+
+        watcher.Path = target.Item1;
+        watcher.Filter = target.Item2;
 
         watcher.NotifyFilter = NotifyFilters.LastWrite;
-
-        watcher.Changed += (senser, eventArgs) => {
+        watcher.Changed += (sender, eventArgs) => {
             DateTime lastWrite = File.GetLastWriteTime(eventArgs.FullPath);
 
-            if (lastWrite != lastOperationTime) {
-                Send("File changed: " + eventArgs.FullPath);
+            if (lastWrite != lastOperationTime)
+            {
+                string outputInfo = String.Format("File changed: {0}", eventArgs.FullPath);
+                Send(outputInfo);
                 lastOperationTime = lastWrite;
             }
-
         };
-
-        watcher.Filter = "*.txt";
 
         watcher.IncludeSubdirectories = true;
         watcher.EnableRaisingEvents = true; // begin watching
-
-        Console.ReadKey(true); // block
     }
+   
 
-    protected override void OnMessage(MessageEventArgs eventArgs) 
+
+/*
+    protected override void OnClose(CloseEventArgs eventArgs) 
     {
         Console.WriteLine(eventArgs.Data);
     }
-
+*/
 
 
 

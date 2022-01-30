@@ -4,35 +4,30 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 
+/*
 using WebSocketSharp;
 using WebSocketSharp.Server;
-
-namespace liverserver.app {
-
+*/
+namespace liveserver.app {
+/*
 public class Server {
     private WebSocketServer wb;
     private HttpListener listener;
     private string ip;
     private int port;
 
-    private string observableFile;
-    private string target;
-
-    public Server(string ip, int port, string filepath, string targetDirectory)
+    public Server(string ip, int port, string filepath)
     {
-        this.observableFile = filepath;
         this.port = port;
         this.ip = ip;
-        this.target = targetDirectory;
 
         listener = new HttpListener();
         listener.Prefixes.Add(String.Format("http://{0}:{1}/", ip, port));
 
         wb = new WebSocketServer("ws://localhost:80");
         wb.AddWebSocketService<ReloaderService>("/",
-            () => new ReloaderService() {
-                targetDir = target
-            });
+            service => { service.Target = filepath; });
+
     }
 
     public void Process()
@@ -45,8 +40,8 @@ public class Server {
         HttpListenerRequest request = context.Request;
         HttpListenerResponse response = context.Response;
 
-        string responseStr = FileSpectator.LoadAndInject(observableFile);
-        byte[] buffer = Encoding.UTF8.GetBytes(responseStr);
+        byte[] buffer = Encoding.UTF8.GetBytes(
+            FileSpectator.LoadAndInject("/home/xemerius/devs/live_server/liveserver.test/rcs/index2.html"));
 
         response.ContentLength64 = buffer.Length;
 
@@ -66,5 +61,5 @@ public class Server {
     }
 
 }
-
+*/
 }

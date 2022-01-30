@@ -1,10 +1,8 @@
-using System;
-using System.Text;
 using System.Text.RegularExpressions;
 
-namespace liverserver.app {
+namespace liveserver.app {
 
-public class FileSpectator {
+public static class FileUtils {
 
     public static string[] AbsolutePathToFiles(string targetDir)
     {
@@ -56,6 +54,38 @@ public class FileSpectator {
 
         return result;
     }
+
+    public static Tuple<string, string> SplitToDirAndFile(string fullPath)
+    {
+        string targetDir = "";
+        string targetFile = "";
+
+        string source = ReverseString(fullPath);
+        int i = 0;
+        for (; i < source.Length; ++i) {
+            if (source[i] == '/') {
+                ++i;
+                break;
+            }
+            targetFile += source[i];
+        }
+
+        for (; i < source.Length; ++i) {
+            targetDir += source[i];
+        }
+
+        return Tuple.Create(
+            ReverseString(targetDir),
+            ReverseString(targetFile)
+        );
+    }
+
+    private static string ReverseString(string input) 
+    {
+        return new string(input.Reverse().ToArray());
+    }
+
+
 
 }
 

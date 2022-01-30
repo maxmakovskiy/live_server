@@ -2,7 +2,7 @@ using Xunit;
 using System.IO;
 using System.Collections;
 
-using liverserver.app;
+using liveserver.app;
 
 namespace liveserver.test {
 
@@ -13,7 +13,7 @@ public class FileSpectatorTest {
     {
         string root = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         string target = root + "/rcs/observableDirs";
-        string[] result = FileSpectator.AbsolutePathToFiles(target);
+        string[] result = FileUtils.AbsolutePathToFiles(target);
         string[] expected = {
             target + "/file1.txt",
             target + "/file2.txt",
@@ -31,7 +31,7 @@ public class FileSpectatorTest {
     {
         string root = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         string target = root + "/rcs/index2.html";
-        string[] result = FileSpectator.LoadAndInject(target).Split('\n');
+        string[] result = FileUtils.LoadAndInject(target).Split('\n');
         string[] expected = {
             "<!DOCTYPE html>",
             "<html>",
@@ -41,7 +41,7 @@ public class FileSpectatorTest {
             "<body>",
             "Hello world!",
             "<script>",
-            "(function() {var url = 'ws://localhost:80/';var output;function init() {output = document.getElementById('output');doWebSocket();}function doWebSocket() {websocket = new WebSocket(url);websocket.onopen = function(e) {onOpen(e);};websocket.onmessage = function(e) {onMessage(e);};}function onOpen(event) {writeToScreen('CONNECTED');send('WebSocket rocks');}function onMessage(event) {writeToScreen('RECEIVE: ' + event.data);}function send(message) {websocket.send(message);}function writeToScreen(message) {var pre = document.createElement('p');pre.innerHTML = message;output.appendChild(pre);}window.addEventListener('load', init, false);})();",
+            "(function() {var url = 'ws://localhost:80/';function init() {doWebSocket();}function doWebSocket() {websocket = new WebSocket(url);websocket.onopen = function(e) {onOpen(e);};websocket.onmessage = function(e) {onMessage(e);};}function onOpen(event) {writeToScreen('CONNECTED');send('WebSocket rocks');}function onMessage(event) {writeToScreen('RECEIVE: ' + event.data);}function send(message) {websocket.send(message);}function writeToScreen(message) {var pre = document.createElement('p');pre.innerHTML = message;document.body.appendChild(pre);}window.addEventListener('load', init, false);})();",
             "</script>",
             "</body>",
             "</html>"     
@@ -50,6 +50,17 @@ public class FileSpectatorTest {
         Assert.Equal(expected, result);
     }
 
+    [Fact]
+    public void TestSplitToDirAndFile()
+    {
+        string source = "/home/xemerius/devs/live_server/liveserver.test/rcs/index2.html";
+        string targetDirExpected = "/home/xemerius/devs/live_server/liveserver.test/rcs";
+        string targetFileExpected = "index2.html";
+
+        var target = FileUtils.SplitToDirAndFile(source);
+        Assert.Equal(targetDirExpected, target.Item1);
+        Assert.Equal(targetFileExpected, target.Item2);
+    }
 
 }
 
