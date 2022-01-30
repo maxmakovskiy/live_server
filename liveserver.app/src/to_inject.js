@@ -1,9 +1,7 @@
 (function() {
     var url = 'ws://localhost:80/';
-    var output;
 
     function init() {
-        output = document.getElementById('output');
         doWebSocket();
     }
 
@@ -35,7 +33,7 @@
     function writeToScreen(message) {
         var pre = document.createElement('p');
         pre.innerHTML = message;
-        output.appendChild(pre);
+        document.body.appendChild(pre);
     }
 
     window.addEventListener('load', init, false);

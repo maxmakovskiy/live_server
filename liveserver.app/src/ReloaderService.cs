@@ -10,8 +10,6 @@ public class ReloaderService : WebSocketBehavior {
 
     protected override void OnOpen()
     {
-        Console.WriteLine("Server: connection was established");
-
         using var watcher = new FileSystemWatcher(targetDir);
 
         watcher.NotifyFilter = NotifyFilters.LastWrite;
