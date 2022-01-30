@@ -1,9 +1,9 @@
 (function() {
-    var url = "ws://localhost:80/";
+    var url = 'ws://localhost:80/';
     var output;
 
     function init() {
-        output = document.getElementById("output");
+        output = document.getElementById('output');
         doWebSocket();
     }
 
@@ -20,12 +20,12 @@
     }
 
     function onOpen(event) {
-        writeToScreen("CONNECTED");
-        send("WebSocket rocks");
+        writeToScreen('CONNECTED');
+        send('WebSocket rocks');
     }
 
     function onMessage(event) {
-        writeToScreen("RECEIVE: " + event.data);
+        writeToScreen('RECEIVE: ' + event.data);
     }
 
     function send(message) {
@@ -33,10 +33,10 @@
     }
 
     function writeToScreen(message) {
-        var pre = document.createElement("p");
+        var pre = document.createElement('p');
         pre.innerHTML = message;
         output.appendChild(pre);
     }
 
-    window.addEventListener("load", init, false);
+    window.addEventListener('load', init, false);
 })();
