@@ -12,30 +12,10 @@ public class Program {
 
     public static void Main(string[] args) 
     {
-        HttpServer server = new HttpServer("127.0.0.1", 80);
-        server.Start();
+        Console.WriteLine("Observe next file {0}", args[0]);
+        Server server = new Server("127.0.0.1", 80, args[0]);
+        server.Process();
 
-        /*
-        string target = "/home/xemerius/devs/live_server/liveserver.test/rcs";
-
-        var wb = new WebSocketServer("ws://localhost:80");
-        wb.AddWebSocketService<ReloaderService>("/",
-            () => new ReloaderService() {
-                targetDir = target
-            });
-
-        wb.Start();
-        
-        Console.ReadKey(true); // block
-        
-        wb.Stop();
-        */
-
-    }
-
-    private static void OnChanged(object sender, FileSystemEventArgs e)
-    {
-        Console.WriteLine($"Changed: {e.FullPath}");
     }
 
 }
