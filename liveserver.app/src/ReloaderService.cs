@@ -20,8 +20,9 @@ public class ReloaderService : WebSocketBehavior {
 
     protected override void OnOpen()
     {
+        Console.WriteLine("WebSocket connection with was successfully established");
+        
         var target = FileUtils.SplitToDirAndFile(Target);
-
         watcher.Path = target.Item1;
         watcher.Filter = target.Item2;
 
@@ -32,6 +33,7 @@ public class ReloaderService : WebSocketBehavior {
             if (lastWrite != lastOperationTime)
             {
                 string outputInfo = String.Format("File changed: {0}", eventArgs.FullPath);
+                Console.WriteLine(outputInfo);
                 Send(outputInfo);
                 lastOperationTime = lastWrite;
             }
@@ -41,8 +43,6 @@ public class ReloaderService : WebSocketBehavior {
         watcher.EnableRaisingEvents = true; // begin watching
     }
    
-
-
 /*
     protected override void OnClose(CloseEventArgs eventArgs) 
     {
