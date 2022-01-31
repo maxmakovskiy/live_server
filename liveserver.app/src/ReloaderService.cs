@@ -1,3 +1,4 @@
+using WebSocketSharp.NetCore;
 using WebSocketSharp.NetCore.Server;
 
 namespace liveserver.app {
@@ -32,25 +33,20 @@ public class ReloaderService : WebSocketBehavior {
 
             if (lastWrite != lastOperationTime)
             {
-                string outputInfo = String.Format("File changed: {0}", eventArgs.FullPath);
-                Console.WriteLine(outputInfo);
-                Send(outputInfo);
+                Console.WriteLine(String.Format("File changed: {0}", eventArgs.FullPath));
+                Send("changed");
                 lastOperationTime = lastWrite;
             }
         };
-
+        
         watcher.IncludeSubdirectories = true;
         watcher.EnableRaisingEvents = true; // begin watching
     }
-   
-/*
-    protected override void OnClose(CloseEventArgs eventArgs) 
+
+    protected override void OnClose(CloseEventArgs eventArgs)
     {
-        Console.WriteLine(eventArgs.Data);
+        Console.WriteLine("WebSocket disconnected");
     }
-*/
-
-
 
 }
 

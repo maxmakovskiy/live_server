@@ -51,7 +51,7 @@ public class Server {
         } else {
             Console.WriteLine("HttpServer does not started");
         }
-
+        
         Console.ReadLine();
         server.Stop();
     }
