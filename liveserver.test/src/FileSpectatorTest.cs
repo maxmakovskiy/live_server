@@ -8,7 +8,7 @@ namespace liveserver.test {
 
 public class FileSpectatorTest {
 
-    private static string GetRoot()
+    public static string GetRoot()
     {
         return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
     }
