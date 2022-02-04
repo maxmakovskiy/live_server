@@ -8,11 +8,15 @@ namespace liveserver.test {
 
 public class FileSpectatorTest {
 
+    private static string GetRoot()
+    {
+        return Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+    }
+    
     [Fact]
     public void TestAbsolutePathToFiles()
     {
-        string root = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        string target = root + "/rcs/observableDirs";
+        string target = GetRoot() + "/rcs/observableDirs";
         string[] result = FileUtils.AbsolutePathToFiles(target);
         string[] expected = {
             target + "/file1.txt",
@@ -29,8 +33,7 @@ public class FileSpectatorTest {
     [Fact]
     public void TestInjection()
     {
-        string root = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        string target = root + "/rcs/index2.html";
+        string target = GetRoot() + "/rcs/index2.html";
         string[] result = FileUtils.LoadAndInject(target).Split('\n');
         string[] expected = {
             "<!DOCTYPE html>",
@@ -53,8 +56,8 @@ public class FileSpectatorTest {
     [Fact]
     public void TestSplitToDirAndFile()
     {
-        string source = "/home/xemerius/devs/live_server/liveserver.test/rcs/index2.html";
-        string targetDirExpected = "/home/xemerius/devs/live_server/liveserver.test/rcs";
+        string source = GetRoot() + "/rcs/index2.html";
+        string targetDirExpected = GetRoot() + "/rcs";
         string targetFileExpected = "index2.html";
 
         var target = FileUtils.SplitToDirAndFile(source);
